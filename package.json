@@ -2,8 +2,10 @@
   "name": "react-mathlive",
   "version": "1.0.0",
   "description": "A react wrapper-component for mathlive.js",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "prepare": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fabian Grewing",
@@ -14,6 +16,7 @@
     "typescript": "^3.2.4"
   },
   "dependencies": {
+    "mathlive": "^0.25.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
   }
