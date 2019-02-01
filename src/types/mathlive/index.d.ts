@@ -1,7 +1,4 @@
 declare module 'mathlive/dist/mathlive.mjs' {
-    const MathLive: {
-        makeMathField: (el: HTMLElement, options?: object) => any
-    };
-
+    const MathLive: any;
     export default MathLive;
 }

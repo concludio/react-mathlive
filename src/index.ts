@@ -1,1 +1,1 @@
-export { MathField } from './Mathfield';
+export * from './Mathfield';
