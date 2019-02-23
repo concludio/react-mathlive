@@ -47,6 +47,7 @@ export interface Props {
 export class MathField extends React.Component<Props> {
     private insertElement: HTMLElement | null = null;
     private readonly combinedOptions: MathFieldOptions;
+    private mathField: any;
 
     constructor(props: Props) {
         super(props);
@@ -95,6 +96,10 @@ export class MathField extends React.Component<Props> {
         }
     }
 
+    componentWillReceiveProps(newProps: Props) {
+        this.mathField.$latex(newProps.latex);
+    }
+
     render() {
         return <div ref={instance => this.insertElement = instance} />;
     }
@@ -104,10 +109,11 @@ export class MathField extends React.Component<Props> {
             throw new Error("React did apparently not mount the insert point correctly.");
         }
         
-        const mf = MathLive.makeMathField(this.insertElement, this.combinedOptions);
+        this.mathField = MathLive.makeMathField(this.insertElement, this.combinedOptions);
+        this.mathField.$latex(this.props.latex);
 
         if (this.props.mathFieldRef) {
-            this.props.mathFieldRef(mf);
+            this.props.mathFieldRef(this.mathField);
         }
     }
 }
