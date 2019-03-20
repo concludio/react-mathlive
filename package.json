@@ -1,10 +1,11 @@
 {
   "name": "react-mathlive",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A react wrapper-component for mathlive.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "build": "npm run prepare",
     "prepare": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

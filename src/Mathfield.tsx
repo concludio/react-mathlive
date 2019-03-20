@@ -97,7 +97,7 @@ export class MathField extends React.Component<Props> {
     }
 
     componentWillReceiveProps(newProps: Props) {
-        this.mathField.$latex(newProps.latex);
+        this.mathField.$latex(newProps.latex, { suppressContentChangeNotifications: true });
     }
 
     render() {
@@ -110,7 +110,7 @@ export class MathField extends React.Component<Props> {
         }
         
         this.mathField = MathLive.makeMathField(this.insertElement, this.combinedOptions);
-        this.mathField.$latex(this.props.latex);
+        this.mathField.$latex(this.props.latex, { suppressContentChangeNotifications: true });
 
         if (this.props.mathFieldRef) {
             this.props.mathFieldRef(this.mathField);
