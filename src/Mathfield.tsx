@@ -59,11 +59,11 @@ export class MathField extends React.Component<Props> {
         if (props.mathFieldOptions && props.mathFieldOptions.onContentDidChange) {
             const fromOptions = props.mathFieldOptions.onContentDidChange;
             this.combinedOptions.onContentDidChange = mf => {
-                this.props.onChange(mf.text('latex'));
+                this.props.onChange(mf.$latex());
                 fromOptions(mf);
             };
         } else {
-            this.combinedOptions.onContentDidChange = mf => this.props.onChange(mf.text('latex'));
+            this.combinedOptions.onContentDidChange = mf => this.props.onChange(mf.$latex());
         }
 
         if (this.props.onBlur) {
@@ -97,8 +97,13 @@ export class MathField extends React.Component<Props> {
     }
 
     componentWillReceiveProps(newProps: Props) {
-        this.mathField.$latex(newProps.latex, { suppressContentChangeNotifications: true });
+        if (newProps.latex !== this.props.latex) {
+            this.mathField.$latex(newProps.latex, { suppressContentChangeNotifications: true });
+        }
     }
+
+    /** The domain of react ends here, so it should not render again. */
+    shouldComponentUpdate() { return false; }
 
     render() {
         return <div ref={instance => this.insertElement = instance} />;
