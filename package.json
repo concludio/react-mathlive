@@ -1,24 +1,27 @@
 {
-  "name": "react-mathlive",
-  "version": "1.0.2",
-  "description": "A react wrapper-component for mathlive.js",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "npm run prepare",
-    "prepare": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Fabian Grewing",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/react": "^16.7.22",
-    "@types/react-dom": "^16.0.11",
-    "typescript": "^3.2.4"
-  },
-  "dependencies": {
-    "mathlive": "^0.25.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
-  }
+	"name": "react-mathlive",
+	"version": "1.1.0",
+	"description": "A react wrapper-component for mathlive.js",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"repository": {
+		"url": "https://github.com/concludio/react-mathlive"
+	},
+	"scripts": {
+		"build": "npm run prepare",
+		"prepare": "tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Fabian Grewing",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/react": "^16.7.22",
+		"@types/react-dom": "^16.0.11",
+		"typescript": "^3.2.4"
+	},
+	"dependencies": {
+		"mathlive": ">= 0.25 < 1",
+		"react": "^16.7.0",
+		"react-dom": "^16.7.0"
+	}
 }
