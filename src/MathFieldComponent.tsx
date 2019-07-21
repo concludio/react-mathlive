@@ -4,32 +4,16 @@ import * as React from 'react';
 import MathLive from 'mathlive/dist/mathlive.mjs';
 
 export interface MathFieldOptions {
-    ignoreSpacebarInMathMode?: boolean;
     onBlur?: (mathfield: any) => void;
     onKeystroke?: (mathfield: any, keystroke: string, ev: KeyboardEvent) => boolean;
-    onContentWillChange?: (mathfield: any) => void;
     onContentDidChange?: (mathfield: any) => void;
-    overrideDefaultInlineShortcuts?: boolean;
-    inlineShortcuts?: { [key: string]: string };
-    virtualKeyboardMode?: "manual" | "onfocus" | "off";
-    virtualKeyboardToggleGlyph?: string;
-    virtualKeyboards?: string;
-    virtualKeyboardRomanLayout?: "querty" | "qwertz" | "azerty" | "dvorak" | "colemak";
-    virtualKeyboardTheme?: "material" | "apple";
-    keypressSound?: string | {
-        delete?: string;
-        return?: string;
-        default: string;
-    };
-    plonkSound?: string;
-    /** Incomplete */
+    /** Incomplete, options type should come from mathlive itself or definitly-typed */
     [ key: string ]: any;
 }
 
 export interface Props {
     latex: string;
     onChange: (latex: string) => void;
-
     onBlur?: () => void;
     onKeystroke?: (ev: KeyboardEvent) => void;
 
@@ -44,7 +28,8 @@ export interface Props {
     mathFieldRef?: (mathfield: any) => void;
 }
 
-export class MathField extends React.Component<Props> {
+/** A react-control that hosts a mathlive-mathfield in it. */
+export class MathFieldComponent extends React.Component<Props> {
     private insertElement: HTMLElement | null = null;
     private readonly combinedOptions: MathFieldOptions;
     private mathField: any;

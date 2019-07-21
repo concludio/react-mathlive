@@ -1,1 +1,1 @@
-export * from './Mathfield';
+export * from './MathFieldComponent';
