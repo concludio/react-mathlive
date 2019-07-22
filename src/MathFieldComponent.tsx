@@ -1,7 +1,7 @@
 import 'mathlive/dist/mathlive.core.css';
 import 'mathlive/dist/mathlive.css';
 import * as React from 'react';
-import MathLive from 'mathlive/dist/mathlive.mjs';
+import { makeMathField } from 'mathlive';
 
 export interface MathFieldOptions {
     onBlur?: (mathfield: any) => void;
@@ -25,14 +25,14 @@ export interface Props {
     /**
      * The mathfield object returned by makeMathField.
      */
-    mathFieldRef?: (mathfield: any) => void;
+    mathFieldRef?: (mathfield: MathField) => void;
 }
 
 /** A react-control that hosts a mathlive-mathfield in it. */
 export class MathFieldComponent extends React.Component<Props> {
     private insertElement: HTMLElement | null = null;
     private readonly combinedOptions: MathFieldOptions;
-    private mathField: any;
+    private mathField: MathField;
 
     constructor(props: Props) {
         super(props);
@@ -99,7 +99,7 @@ export class MathFieldComponent extends React.Component<Props> {
             throw new Error("React did apparently not mount the insert point correctly.");
         }
         
-        this.mathField = MathLive.makeMathField(this.insertElement, this.combinedOptions);
+        this.mathField = makeMathField(this.insertElement, this.combinedOptions);
         this.mathField.$latex(this.props.latex, { suppressChangeNotifications: true });
 
         if (this.props.mathFieldRef) {
