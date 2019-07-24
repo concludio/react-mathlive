@@ -30,6 +30,8 @@ onMathChange(mathText) {
 }
 ```
 
+There is an [example](/examples/example1/) using Typescript available.
+
 ## Interacting with the native library
 
 The `MathfieldComponent` also allows retrieving the native [`Mathfield`-object](http://docs.mathlive.io/MathField.html) from the Mathlive-library via the `mathFieldRef`-parameter:
