@@ -3,14 +3,6 @@ import 'mathlive/dist/mathlive.css';
 import * as React from 'react';
 import { makeMathField } from 'mathlive';
 
-export interface MathFieldOptions {
-    onBlur?: (mathfield: any) => void;
-    onKeystroke?: (mathfield: any, keystroke: string, ev: KeyboardEvent) => boolean;
-    onContentDidChange?: (mathfield: any) => void;
-    /** Incomplete, options type should come from mathlive itself or definitly-typed */
-    [ key: string ]: any;
-}
-
 export interface Props {
     latex: string;
     onChange: (latex: string) => void;
@@ -20,7 +12,7 @@ export interface Props {
     /** 
      * The raw options of mathlive's makeMathField.
      * */
-    mathFieldOptions?: MathFieldOptions;
+    mathFieldOptions?: MathFieldConfig;
 
     /**
      * The mathfield object returned by makeMathField.
@@ -31,7 +23,7 @@ export interface Props {
 /** A react-control that hosts a mathlive-mathfield in it. */
 export class MathFieldComponent extends React.Component<Props> {
     private insertElement: HTMLElement | null = null;
-    private readonly combinedOptions: MathFieldOptions;
+    private readonly combinedOptions: MathFieldConfig;
     private mathField: MathField;
 
     constructor(props: Props) {
