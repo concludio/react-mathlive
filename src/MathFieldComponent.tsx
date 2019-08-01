@@ -1,15 +1,7 @@
 import 'mathlive/dist/mathlive.core.css';
 import 'mathlive/dist/mathlive.css';
 import * as React from 'react';
-import MathLive from 'mathlive/dist/mathlive.mjs';
-
-export interface MathFieldOptions {
-    onBlur?: (mathfield: any) => void;
-    onKeystroke?: (mathfield: any, keystroke: string, ev: KeyboardEvent) => boolean;
-    onContentDidChange?: (mathfield: any) => void;
-    /** Incomplete, options type should come from mathlive itself or definitly-typed */
-    [ key: string ]: any;
-}
+import { makeMathField } from 'mathlive';
 
 export interface Props {
     latex: string;
@@ -20,19 +12,19 @@ export interface Props {
     /** 
      * The raw options of mathlive's makeMathField.
      * */
-    mathFieldOptions?: MathFieldOptions;
+    mathFieldOptions?: MathFieldConfig;
 
     /**
      * The mathfield object returned by makeMathField.
      */
-    mathFieldRef?: (mathfield: any) => void;
+    mathFieldRef?: (mathfield: MathField) => void;
 }
 
 /** A react-control that hosts a mathlive-mathfield in it. */
 export class MathFieldComponent extends React.Component<Props> {
     private insertElement: HTMLElement | null = null;
-    private readonly combinedOptions: MathFieldOptions;
-    private mathField: any;
+    private readonly combinedOptions: MathFieldConfig;
+    private mathField: MathField;
 
     constructor(props: Props) {
         super(props);
@@ -99,7 +91,7 @@ export class MathFieldComponent extends React.Component<Props> {
             throw new Error("React did apparently not mount the insert point correctly.");
         }
         
-        this.mathField = MathLive.makeMathField(this.insertElement, this.combinedOptions);
+        this.mathField = makeMathField(this.insertElement, this.combinedOptions);
         this.mathField.$latex(this.props.latex, { suppressChangeNotifications: true });
 
         if (this.props.mathFieldRef) {
