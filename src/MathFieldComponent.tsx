@@ -5,7 +5,7 @@ import { makeMathField } from 'mathlive';
 
 export interface Props {
     latex: string;
-    onChange: (latex: string) => void;
+    onChange?: (latex: string) => void;
     onBlur?: () => void;
     onKeystroke?: (ev: KeyboardEvent) => void;
 
@@ -33,40 +33,42 @@ export class MathFieldComponent extends React.Component<Props> {
             ...props.mathFieldOptions
         };
 
-        if (props.mathFieldOptions && props.mathFieldOptions.onContentDidChange) {
-            const fromOptions = props.mathFieldOptions.onContentDidChange;
-            this.combinedOptions.onContentDidChange = mf => {
-                this.props.onChange(mf.$latex());
-                fromOptions(mf);
-            };
-        } else {
-            this.combinedOptions.onContentDidChange = mf => this.props.onChange(mf.$latex());
-        }
+        const { onChange, onBlur, onKeystroke } = this.props;
 
-        if (this.props.onBlur) {
-            const provided = this.props.onBlur;
-            if (props.mathFieldOptions && props.mathFieldOptions.onBlur) {
-                const fromOptions = props.mathFieldOptions.onBlur;
-                this.combinedOptions.onBlur = mf => {
-                    provided();
+        if (onChange) {
+            if (props.mathFieldOptions && props.mathFieldOptions.onContentDidChange) {
+                const fromOptions = props.mathFieldOptions.onContentDidChange;
+                this.combinedOptions.onContentDidChange = mf => {
+                    onChange(mf.$latex());
                     fromOptions(mf);
                 };
             } else {
-                this.combinedOptions.onBlur = provided;
+                this.combinedOptions.onContentDidChange = mf => onChange(mf.$latex());
             }
         }
 
-        if (this.props.onKeystroke) {
-            const provided = this.props.onKeystroke;
+        if (onBlur) {
+            if (props.mathFieldOptions && props.mathFieldOptions.onBlur) {
+                const fromOptions = props.mathFieldOptions.onBlur;
+                this.combinedOptions.onBlur = mf => {
+                    onBlur();
+                    fromOptions(mf);
+                };
+            } else {
+                this.combinedOptions.onBlur = onBlur;
+            }
+        }
+
+        if (onKeystroke) {
             if (props.mathFieldOptions && props.mathFieldOptions.onKeystroke) {
                 const fromOptions = props.mathFieldOptions.onKeystroke;
                 this.combinedOptions.onKeystroke = (mf, ks, ev) => {
-                    provided(ev);
+                    onKeystroke(ev);
                     return fromOptions(mf, ks, ev);
                 };
             } else {
                 this.combinedOptions.onKeystroke = (mf, ks, ev) => {
-                    provided(ev);
+                    onKeystroke(ev);
                     return true;
                 }
             }
