@@ -3,6 +3,8 @@
 
 [![Build Status](https://semaphoreci.com/api/v1/concludio/react-mathlive/branches/master/badge.svg)](https://semaphoreci.com/concludio/react-mathlive)
 
+[![Coverage Status](https://coveralls.io/repos/github/concludio/react-mathlive/badge.svg?branch=master)](https://coveralls.io/github/concludio/react-mathlive?branch=master)
+
 A react-component for using [mathlive.js](https://mathlive.io)'s mathfield (interactive math editor).
 
 ## How to install
