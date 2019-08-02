@@ -24,7 +24,7 @@ export interface Props {
 export class MathFieldComponent extends React.Component<Props> {
     private insertElement: HTMLElement | null = null;
     private readonly combinedOptions: MathFieldConfig;
-    private mathField: MathField;
+    private mathField: MathField | undefined;
 
     constructor(props: Props) {
         super(props);
@@ -76,6 +76,10 @@ export class MathFieldComponent extends React.Component<Props> {
     }
 
     componentWillReceiveProps(newProps: Props) {
+        if (!this.mathField) {
+            throw new Error("Component was not correctly initialized.");
+        }
+
         if (newProps.latex !== this.props.latex) {
             this.mathField.$latex(newProps.latex, { suppressChangeNotifications: true });
         }
