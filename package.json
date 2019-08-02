@@ -8,9 +8,9 @@
 		"url": "https://github.com/concludio/react-mathlive"
 	},
 	"scripts": {
-		"build": "npm run prepare",
-		"prepare": "tsc",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build": "tsc",
+		"prepare": "npm run build",
+		"test": "jest"
 	},
 	"author": "Fabian Grewing",
 	"license": "MIT",
@@ -18,11 +18,19 @@
 		"react",
 		"math",
 		"editor",
+		"input",
+		"interactive",
+		"wysiwyg",
 		"latex"
 	],
 	"devDependencies": {
+		"@testing-library/react": "^8.0.7",
+		"@types/jest": "^24.0.16",
 		"@types/react": "^16.7.22",
 		"@types/react-dom": "^16.0.11",
+		"identity-obj-proxy": "^3.0.0",
+		"jest": "^24.8.0",
+		"ts-jest": "^24.0.2",
 		"typescript": "^3.2.4"
 	},
 	"dependencies": {

@@ -2,9 +2,10 @@
     "compilerOptions": {
       "outDir": "./dist",
       "target": "es5",
+      "lib": [ "dom", "dom.iterable", "esnext" ],
       "module": "commonjs",
       "noImplicitAny": true,
-      "strictNullChecks": true,
+      "strict": true,
       "declaration": true,
       "sourceMap": true,
       "jsx": "react",
