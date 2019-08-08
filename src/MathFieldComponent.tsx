@@ -6,13 +6,11 @@ import { makeMathField } from 'mathlive';
 export interface Props {
     latex: string;
     onChange?: (latex: string) => void;
-    onBlur?: () => void;
-    onKeystroke?: (ev: KeyboardEvent) => void;
 
     /** 
      * The raw options of mathlive's makeMathField.
      * */
-    mathFieldOptions?: MathFieldConfig;
+    mathFieldConfig?: MathFieldConfig;
 
     /**
      * The mathfield object returned by makeMathField.
@@ -20,60 +18,33 @@ export interface Props {
     mathFieldRef?: (mathfield: MathField) => void;
 }
 
+export function combineConfig(props: Props): MathFieldConfig {
+    const combinedConfiguration: MathFieldConfig = {
+        ...props.mathFieldConfig
+    };
+
+    const { onChange } = props;
+
+    if (onChange) {
+        if (props.mathFieldConfig && props.mathFieldConfig.onContentDidChange) {
+            const fromConfig = props.mathFieldConfig.onContentDidChange;
+            combinedConfiguration.onContentDidChange = mf => {
+                onChange(mf.$latex());
+                fromConfig(mf);
+            };
+        } else {
+            combinedConfiguration.onContentDidChange = mf => onChange(mf.$latex());
+        }
+    }
+
+    return combinedConfiguration;
+}
+
 /** A react-control that hosts a mathlive-mathfield in it. */
 export class MathFieldComponent extends React.Component<Props> {
     private insertElement: HTMLElement | null = null;
-    private readonly combinedOptions: MathFieldConfig;
+    private readonly combinedConfiguration = combineConfig(this.props);
     private mathField: MathField | undefined;
-
-    constructor(props: Props) {
-        super(props);
-
-        this.combinedOptions = {
-            ...props.mathFieldOptions
-        };
-
-        const { onChange, onBlur, onKeystroke } = this.props;
-
-        if (onChange) {
-            if (props.mathFieldOptions && props.mathFieldOptions.onContentDidChange) {
-                const fromOptions = props.mathFieldOptions.onContentDidChange;
-                this.combinedOptions.onContentDidChange = mf => {
-                    onChange(mf.$latex());
-                    fromOptions(mf);
-                };
-            } else {
-                this.combinedOptions.onContentDidChange = mf => onChange(mf.$latex());
-            }
-        }
-
-        if (onBlur) {
-            if (props.mathFieldOptions && props.mathFieldOptions.onBlur) {
-                const fromOptions = props.mathFieldOptions.onBlur;
-                this.combinedOptions.onBlur = mf => {
-                    onBlur();
-                    fromOptions(mf);
-                };
-            } else {
-                this.combinedOptions.onBlur = onBlur;
-            }
-        }
-
-        if (onKeystroke) {
-            if (props.mathFieldOptions && props.mathFieldOptions.onKeystroke) {
-                const fromOptions = props.mathFieldOptions.onKeystroke;
-                this.combinedOptions.onKeystroke = (mf, ks, ev) => {
-                    onKeystroke(ev);
-                    return fromOptions(mf, ks, ev);
-                };
-            } else {
-                this.combinedOptions.onKeystroke = (mf, ks, ev) => {
-                    onKeystroke(ev);
-                    return true;
-                }
-            }
-        }
-    }
 
     componentWillReceiveProps(newProps: Props) {
         if (!this.mathField) {
@@ -97,7 +68,7 @@ export class MathFieldComponent extends React.Component<Props> {
             throw new Error("React did apparently not mount the insert point correctly.");
         }
         
-        this.mathField = makeMathField(this.insertElement, this.combinedOptions);
+        this.mathField = makeMathField(this.insertElement, this.combinedConfiguration);
         this.mathField.$latex(this.props.latex, { suppressChangeNotifications: true });
 
         if (this.props.mathFieldRef) {
