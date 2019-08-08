@@ -1,11 +1,9 @@
 
 # react-mathlive
-
-[![Build Status](https://semaphoreci.com/api/v1/concludio/react-mathlive/branches/master/badge.svg)](https://semaphoreci.com/concludio/react-mathlive)
-
+[![Build Status](https://semaphoreci.com/api/v1/concludio/react-mathlive/branches/master/shields_badge.svg)](https://semaphoreci.com/concludio/react-mathlive)
 [![Coverage Status](https://coveralls.io/repos/github/concludio/react-mathlive/badge.svg?branch=master)](https://coveralls.io/github/concludio/react-mathlive?branch=master)
 
-A react-component for using [mathlive.js](https://mathlive.io)'s mathfield (interactive math editor).
+A react-component using [mathlive.js](https://mathlive.io)'s mathfield (interactive math editor).
 
 ## How to install
 
@@ -28,7 +26,7 @@ render() {
   return <MathFieldComponent
     latex="f(x)=\\log _10 x"
     onChange={this.onMathChange}
-  />
+  />;
 }
 
 onMathChange(mathText) {
@@ -38,7 +36,7 @@ onMathChange(mathText) {
 
 There is an [example](/examples/example1/) using Typescript available.
 
-## Interacting with the native library
+### Interacting with the native library
 
 The `MathfieldComponent` also allows retrieving the native [`Mathfield`-object](http://docs.mathlive.io/MathField.html) from the Mathlive-library via the `mathFieldRef`-parameter:
 
@@ -46,8 +44,27 @@ The `MathfieldComponent` also allows retrieving the native [`Mathfield`-object](
 render() {
   return <MathFieldComponent
     mathFieldRef={mf => (this.internalMathField = mf)}
-  />
+  />;
 }
 ```
 
-Via the `mathFieldOptions`-parameter it's possible to provide the native `Mathfield` with [`MathFieldOptions`](http://docs.mathlive.io/tutorial-CONFIG.html).
+Via the optional `mathFieldConfig`-parameter it's possible to provide the native `Mathfield` with a [`MathFieldConfig`](http://docs.mathlive.io/tutorial-CONFIG.html) on its creation:
+
+
+```JavaScript
+render() {
+  return <MathFieldComponent
+    mathFieldConfig={{
+      defaultMode: "text"
+      virtualKeyboardMode: "onfocus"
+    }}
+  />;
+}
+```
+
+## Contribute
+
+This is an open source library and issues and pull requests are very welcome.
+
+See [Contributing](CONTRIBUTING.md).
+
