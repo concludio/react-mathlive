@@ -3,7 +3,7 @@
 [![Build Status](https://semaphoreci.com/api/v1/concludio/react-mathlive/branches/master/shields_badge.svg)](https://semaphoreci.com/concludio/react-mathlive)
 [![Coverage Status](https://coveralls.io/repos/github/concludio/react-mathlive/badge.svg?branch=master)](https://coveralls.io/github/concludio/react-mathlive?branch=master)
 
-A react-component using [mathlive.js](https://mathlive.io)'s mathfield (interactive math editor).
+A react component using [mathlive.js](https://mathlive.io)'s mathfield (interactive math editor).
 
 ## How to install
 
@@ -13,13 +13,13 @@ You can install *react-mathlive* like any other Javascript or Typescript library
 npm i react-mathlive
 ```
 
-For Typescript users: As *react-mathlive* is written in Typescript, it comes with it's own typings.
+For Typescript users: As *react-mathlive* is written in Typescript, it comes with its own typings.
 
 ## How to use
 
-This text assumes you know [how to build simple react-components](https://reactjs.org/tutorial/tutorial.html).
+This text assumes you know [how to build simple react components](https://reactjs.org/tutorial/tutorial.html).
 
-You can use the `MathfieldComponent` in your web-application as follows:
+You can use the `MathFieldComponent` in your web application as follows:
 
 ```JSX
 render() {
@@ -34,11 +34,11 @@ onMathChange(mathText) {
 }
 ```
 
-There is an [example](/examples/example1/) using Typescript available.
+There is also an [example Typescript react application](/examples/example1/) using this library.
 
 ### Interacting with the native library
 
-The `MathfieldComponent` also allows retrieving the native [`Mathfield`-object](http://docs.mathlive.io/MathField.html) from the Mathlive-library via the `mathFieldRef`-parameter:
+The `MathFieldComponent` also allows retrieving the native [`MathField` object](http://docs.mathlive.io/MathField.html) from the Mathlive library via the `mathFieldRef` parameter:
 
 ```JavaScript
 render() {
@@ -48,10 +48,10 @@ render() {
 }
 ```
 
-Via the optional `mathFieldConfig`-parameter it's possible to provide the native `Mathfield` with a [`MathFieldConfig`](http://docs.mathlive.io/tutorial-CONFIG.html) on its creation:
+Via the optional `mathFieldConfig` parameter it is possible to provide the native `MathField` with a [`MathFieldConfig`](http://docs.mathlive.io/tutorial-CONFIG.html) on its creation:
 
 
-```JavaScript
+```JSX
 render() {
   return <MathFieldComponent
     mathFieldConfig={{

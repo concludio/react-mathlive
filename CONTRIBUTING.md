@@ -2,17 +2,17 @@
 
 ## Before contributing
 
-This library is a thin wrapper (the "react wrapper") around Mathlive (the "base library"). It's likely that errors encountered when using the wrapper originate in the base library. Likewise, feature-requests and feature-PRs should probably go directly into the base library as well. 
+This library is a thin wrapper (the "react wrapper") around Mathlive (the "base library"). It's likely that errors encountered when using the wrapper originate in the base library. Likewise, feature requests and feature PRs should probably go directly into the base library as well. 
 
 ## What to contribute
 
-Contributions to the react-wrapper can be issues, feature-requests or pull-requests (code), that should 
+Contributions to the react wrapper can be issues, feature requests or pull requests (code), that should 
 
 * improve the interaction of react and mathlive, 
 * make sure best practices in react are used
-* simplify using of the wrapper
+* simplify using the wrapper
 * improve the general code style
-* add test-cases
+* add test cases
 * adjust for new react / mathlive versions or
 * fix existing bugs in the implementation.
 
