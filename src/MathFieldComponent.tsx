@@ -6,7 +6,13 @@ import { makeMathField } from 'mathlive';
 export interface Props {
     latex: string;
     onChange?: (latex: string) => void;
+    /**
+     * @deprecated Use native configuration instead.
+     */
     onBlur?: () => void;
+    /**
+     * @deprecated Use native configuration instead.
+     */
     onKeystroke?: (ev: KeyboardEvent) => void;
 
     /** 
