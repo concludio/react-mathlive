@@ -36,7 +36,7 @@
 		"typescript": "^3.2.4"
 	},
 	"dependencies": {
-		"mathlive": ">= 0.32.1 < 1",
+		"mathlive": "file:../mathlive",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0"
 	}

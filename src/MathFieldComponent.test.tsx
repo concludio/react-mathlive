@@ -23,9 +23,11 @@ describe("combineConfig", () => {
             },
         });
 
-        combinedConfig.onContentDidChange!({
+        const mockMathField = {
             $latex: () => "bar",
-        });
+        } as MathField; 
+
+        combinedConfig.onContentDidChange!(mockMathField);
 
         expect(value1).toBe("bar");
         expect(value2).toBe("bar");
@@ -81,6 +83,7 @@ describe("MathFieldComponent", () => {
                 return <MathFieldComponent 
                     mathFieldRef={mf => this.mathField = mf}
                     latex={this.state.value}
+
                 />;
             }
         }
@@ -98,12 +101,6 @@ describe("MathFieldComponent", () => {
 
     test("invalidly created instances throw correct errors", () => {
         const mathFieldComponent = new MathFieldComponent({ latex: "fubar" });
-        try {
-            mathFieldComponent.componentWillReceiveProps({ latex: "baz" });
-            fail("The previous line should have thrown.");
-        } catch (e) {
-            expect(e.message).toBe("Component was not correctly initialized.");
-        }
 
         try {
             mathFieldComponent.componentDidMount();
