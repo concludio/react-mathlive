@@ -1,1 +1,1 @@
-export * from './MathFieldComponent';
+export { MathFieldComponent, Props as MathFieldComponentProps } from './MathFieldComponent';
