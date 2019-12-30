@@ -4,6 +4,7 @@
       "target": "es5",
       "lib": [ "dom", "dom.iterable", "esnext" ],
       "module": "commonjs",
+      "allowJs": false,
       "noImplicitAny": true,
       "strict": true,
       "declaration": true,
@@ -15,12 +16,14 @@
       ]
     },
     "include": [
-      "./src/**/*.tsx",
-      "./src/**/*.ts"
+      "src/**/*.tsx",
+      "src/**/*.ts"
     ],
     "exclude": [
       "node_modules",
       "dist",
-      "examples"
+      "examples",
+      "**/*.test.ts",
+      "**/*.test.tsx"
     ]
   }

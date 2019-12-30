@@ -1,8 +1,11 @@
 {
 	"name": "react-mathlive",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "An interactive math input for react.",
 	"main": "dist/index.js",
+	"files": [
+		"/dist"
+	],
 	"types": "dist/index.d.ts",
 	"repository": {
 		"url": "https://github.com/concludio/react-mathlive"
