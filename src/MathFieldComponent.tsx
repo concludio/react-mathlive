@@ -81,12 +81,7 @@ export class MathFieldComponent extends React.Component<Props> {
             throw new Error("React did apparently not mount the insert point correctly.");
         }
 
-        let initialValue: string;
-        if (this.props.initialLatex !== undefined) {
-            initialValue = this.props.initialLatex;
-        } else {
-            initialValue = this.props.latex;
-        }
+        const initialValue = this.props.initialLatex ?? this.props.latex;
         
         this.mathField = makeMathField(this.insertElement, this.combinedConfiguration);
         this.mathField.$latex(initialValue, { suppressChangeNotifications: true });

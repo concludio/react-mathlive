@@ -36,7 +36,7 @@
 		"identity-obj-proxy": "^3.0.0",
 		"jest": "24.7.1",
 		"ts-jest": "^24.0.2",
-		"typescript": "^3.2.4"
+		"typescript": "^3.7"
 	},
 	"dependencies": {
 		"mathlive": ">= 0.32.3 < 1",
