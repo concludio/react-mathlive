@@ -14,7 +14,7 @@ interface BaseProps {
     /**
      * The mathfield object returned by makeMathField.
      */
-    mathFieldRef?: (mathfield: MathField) => void;
+    mathFieldRef?: (mathfield: Mathfield) => void;
 }
 
 interface ControlledProps extends BaseProps {
@@ -55,19 +55,31 @@ export function combineConfig(props: Props): MathFieldConfig {
 export class MathFieldComponent extends React.Component<Props> {
     private insertElement: HTMLElement | null = null;
     private readonly combinedConfiguration = combineConfig(this.props);
-    private mathField: MathField | undefined;
+    private mathField: Mathfield | undefined;
 
     componentDidUpdate(prevProps: Props) {
         if (!this.mathField) {
             throw new Error("Component was not correctly initialized.");
         }
+        const p = {
+            prevProps,
+            props: this.props,
+        }
+
+        console.log("componentDidUpdate", p);
 
         if (prevProps.latex !== undefined) {
+            console.log("prevProps.latex !== undefined", p);
             if (this.props.latex === undefined) {
                 throw new Error("Cannot change from controlled to uncontrolled state!");
             }
             if (this.props.latex !== prevProps.latex) {
-                this.mathField.$latex(this.props.latex, { suppressChangeNotifications: true });
+                console.log("trigger mathlive update", this.props.latex);
+                if (this.props.latex === "") {
+                    this.mathField.$perform("deleteAll");
+                } else {
+                    this.mathField.$latex(this.props.latex, { suppressChangeNotifications: true });
+                }
             }
         }
     }

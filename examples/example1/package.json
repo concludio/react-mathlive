@@ -11,7 +11,8 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "typescript": "3.5.3",
-    "react-mathlive": "file:../.."
+    "react-mathlive": "file:../..",
+    "mathlive": "^0.35.1"
   },
   "scripts": {
     "start": "react-scripts start",

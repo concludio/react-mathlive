@@ -23,6 +23,9 @@ class App extends React.Component<{}, State> {
           value={this.state.latex}
           onChange={ev => this.onLatexChange(ev.target.value)}
         />
+        <button onClick={() => this.setState({ latex: "" })}>
+          Clear all
+        </button>
       </div>
     );
   }
