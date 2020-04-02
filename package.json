@@ -34,8 +34,8 @@
 		"@types/react-dom": "^16.0.11",
 		"coveralls": "^3.0.5",
 		"identity-obj-proxy": "^3.0.0",
-		"jest": "24.7.1",
-		"ts-jest": "^24.0.2",
+		"jest": "^25.2.0",
+		"ts-jest": "^25.3.0",
 		"typescript": "^3.7"
 	},
 	"dependencies": {

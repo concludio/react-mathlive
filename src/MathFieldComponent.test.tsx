@@ -25,7 +25,7 @@ describe("combineConfig", () => {
 
         const mockMathField = {
             $latex: () => "bar",
-        } as MathField; 
+        } as Mathfield; 
 
         combinedConfig.onContentDidChange!(mockMathField);
 
