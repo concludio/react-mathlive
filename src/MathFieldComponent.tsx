@@ -65,16 +65,11 @@ export class MathFieldComponent extends React.Component<Props> {
             prevProps,
             props: this.props,
         }
-
-        console.log("componentDidUpdate", p);
-
         if (prevProps.latex !== undefined) {
-            console.log("prevProps.latex !== undefined", p);
             if (this.props.latex === undefined) {
                 throw new Error("Cannot change from controlled to uncontrolled state!");
             }
             if (this.props.latex !== prevProps.latex) {
-                console.log("trigger mathlive update", this.props.latex);
                 if (this.props.latex === "") {
                     this.mathField.$perform("deleteAll");
                 } else {
