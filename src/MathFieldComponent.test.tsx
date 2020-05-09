@@ -95,8 +95,10 @@ describe("MathFieldComponent", () => {
         expect(mathField.$latex()).toBe("foo");
 
         container.setState({ value: "bar" });
-        container.forceUpdate();
         expect(mathField.$latex()).toBe("bar");
+
+        container.setState({ value: "" });
+        expect(mathField.$latex()).toBe("");
     });
 
     test("invalidly created instances throw correct errors", () => {
