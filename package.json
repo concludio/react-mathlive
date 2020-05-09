@@ -1,6 +1,6 @@
 {
 	"name": "react-mathlive",
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"description": "An interactive math input for react.",
 	"main": "dist/index.js",
 	"files": [
@@ -13,7 +13,7 @@
 	"scripts": {
 		"build": "tsc",
 		"prepare": "npm run build",
-		"test": "jest",
+		"test": "jest --coverage",
 		"coverage": "jest --coverage --coverageReporters=text-lcov | coveralls"
 	},
 	"author": "Fabian Grewing",
@@ -39,7 +39,7 @@
 		"typescript": "^3.7"
 	},
 	"dependencies": {
-		"mathlive": ">= 0.35.0 < 1",
+		"mathlive": ">= 0.35.0 < 0.50",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0"
 	}
