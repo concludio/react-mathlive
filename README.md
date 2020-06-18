@@ -19,12 +19,24 @@ For Typescript users: As *react-mathlive* is written in Typescript, it comes wit
 
 This text assumes you know [how to build simple react components](https://reactjs.org/tutorial/tutorial.html).
 
-You can use the `MathFieldComponent` in your web application as follows:
+You can use the `MathfieldComponent` in your web application as follows:
+
+```JS
+import { MathfieldComponent } from "react-mathlive";
+```
+
+You can then either use it as a controlled or uncontrolled component.
+
+### Uncontrolled component
+
+In this mode the mathfield is initialized with the `initialLatex`. Whenever the user performs changes the `onChange`-handler is called.
+
+This example is part of an assumed react component class.
 
 ```JSX
 render() {
-  return <MathFieldComponent
-    latex="f(x)=\\log _10 x"
+  return <MathfieldComponent
+    initialLatex="f(x)=\\log _10 x"
     onChange={this.onMathChange}
   />;
 }
@@ -34,27 +46,47 @@ onMathChange(mathText) {
 }
 ```
 
-There is also an [example Typescript react application](/examples/example1/) using this library.
+In an uncontrolled `MathfieldComponent` the only way to programmatically change the mathfields contents are by accessing the `mathfield` directly and calling the modifying methods in there (see [Interacting with the native library](#Interacting-with-the-native-library)).
 
-### Interacting with the native library
+### Controlled component
 
-The `MathFieldComponent` also allows retrieving the native [`MathField` object](http://docs.mathlive.io/MathField.html) from the Mathlive library via the `mathFieldRef` parameter:
+In this mode the mathfield gets its contents updated whenever the `latex`-property changes.
 
-```JavaScript
-render() {
-  return <MathFieldComponent
-    mathFieldRef={mf => (this.internalMathField = mf)}
+This example makes use of reacts functional components.
+
+```JSX
+export function MyComponent() {
+  const [latex, setLatex] = React.useState("f(x)=\\log _10 x");
+  return <MathfieldComponent
+    latex={latex}
+    onChange={setLatex}
   />;
 }
 ```
 
-Via the optional `mathFieldConfig` parameter it is possible to provide the native `MathField` with a [`MathFieldConfig`](http://docs.mathlive.io/tutorial-CONFIG.html) on its creation:
+There is also an [example Typescript react application](/examples/example1/) using this library.
+
+### Interacting with the native library
+
+The `MathfieldComponent` also allows retrieving the native [`Mathfield` object](https://cortexjs.io/docs/mathlive/#(%22mathfield%22%3Amodule).(Mathfield%3Ainterface)) from the Mathlive library via the `mathfieldRef` parameter:
+
+```JavaScript
+render() {
+  return <MathfieldComponent
+    mathfieldRef={mf => (this.internalMathfield = mf)}
+  />;
+}
+```
+
+The object stored in `internalMathfield` can be used to read and modify the underlying mathfield directly.
+
+Via the optional `mathfieldConfig` parameter it is possible to provide the native `Mathfield` with a [`MathfieldConfig`](https://cortexjs.io/docs/mathlive/#(%22config%22%3Amodule).(MathfieldConfig%3Atype)) on its creation:
 
 
 ```JSX
 render() {
-  return <MathFieldComponent
-    mathFieldConfig={{
+  return <MathfieldComponent
+    mathfieldConfig={{
       defaultMode: "text"
       virtualKeyboardMode: "onfocus"
     }}
