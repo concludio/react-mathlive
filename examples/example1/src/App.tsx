@@ -1,5 +1,5 @@
 import React from 'react';
-import { MathFieldComponent } from 'react-mathlive';
+import { MathfieldComponent } from 'react-mathlive';
 
 interface State {
   latex: string;
@@ -12,7 +12,7 @@ class App extends React.Component<{}, State> {
     return (
       <div>
         MathField:
-        <MathFieldComponent
+        <MathfieldComponent
           latex={this.state.latex}
           onChange={this.onLatexChange}
         />
