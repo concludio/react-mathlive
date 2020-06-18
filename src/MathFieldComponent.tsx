@@ -1,7 +1,7 @@
 import 'mathlive/dist/mathlive.core.css';
 import 'mathlive/dist/mathlive.css';
 import * as React from 'react';
-import { makeMathField } from 'mathlive';
+import { makeMathField, MathfieldConfig, Mathfield } from 'mathlive';
 
 interface BaseProps {
     onChange?: (latex: string) => void;
@@ -9,12 +9,12 @@ interface BaseProps {
     /** 
      * The raw options of mathlive's makeMathField.
      * */
-    mathFieldConfig?: MathFieldConfig;
+    mathfieldConfig?: MathfieldConfig;
 
     /**
      * The mathfield object returned by makeMathField.
      */
-    mathFieldRef?: (mathfield: Mathfield) => void;
+    mathfieldRef?: (mathfield: Mathfield) => void;
 }
 
 interface ControlledProps extends BaseProps {
@@ -29,16 +29,16 @@ interface UncontrolledProps extends BaseProps {
 
 export type Props = ControlledProps | UncontrolledProps;
 
-export function combineConfig(props: Props): MathFieldConfig {
-    const combinedConfiguration: MathFieldConfig = {
-        ...props.mathFieldConfig
+export function combineConfig(props: Props): MathfieldConfig {
+    const combinedConfiguration: MathfieldConfig = {
+        ...props.mathfieldConfig
     };
 
     const { onChange } = props;
 
     if (onChange) {
-        if (props.mathFieldConfig && props.mathFieldConfig.onContentDidChange) {
-            const fromConfig = props.mathFieldConfig.onContentDidChange;
+        if (props.mathfieldConfig && props.mathfieldConfig.onContentDidChange) {
+            const fromConfig = props.mathfieldConfig.onContentDidChange;
             combinedConfiguration.onContentDidChange = mf => {
                 onChange(mf.$latex());
                 fromConfig(mf);
@@ -52,18 +52,14 @@ export function combineConfig(props: Props): MathFieldConfig {
 }
 
 /** A react-control that hosts a mathlive-mathfield in it. */
-export class MathFieldComponent extends React.Component<Props> {
+export class MathfieldComponent extends React.Component<Props> {
     private insertElement: HTMLElement | null = null;
     private readonly combinedConfiguration = combineConfig(this.props);
-    private mathField: Mathfield | undefined;
+    private mathfield: Mathfield | undefined;
 
     componentDidUpdate(prevProps: Props) {
-        if (!this.mathField) {
+        if (!this.mathfield) {
             throw new Error("Component was not correctly initialized.");
-        }
-        const p = {
-            prevProps,
-            props: this.props,
         }
         if (prevProps.latex !== undefined) {
             if (this.props.latex === undefined) {
@@ -71,9 +67,9 @@ export class MathFieldComponent extends React.Component<Props> {
             }
             if (this.props.latex !== prevProps.latex) {
                 if (this.props.latex === "") {
-                    this.mathField.$perform("deleteAll");
+                    this.mathfield.$perform("deleteAll");
                 } else {
-                    this.mathField.$latex(this.props.latex, { suppressChangeNotifications: true });
+                    this.mathfield.$latex(this.props.latex, { suppressChangeNotifications: true });
                 }
             }
         }
@@ -90,11 +86,11 @@ export class MathFieldComponent extends React.Component<Props> {
 
         const initialValue = this.props.initialLatex ?? this.props.latex;
         
-        this.mathField = makeMathField(this.insertElement, this.combinedConfiguration);
-        this.mathField.$latex(initialValue, { suppressChangeNotifications: true });
+        this.mathfield = makeMathField(this.insertElement, this.combinedConfiguration);
+        this.mathfield.$latex(initialValue, { suppressChangeNotifications: true });
 
-        if (this.props.mathFieldRef) {
-            this.props.mathFieldRef(this.mathField);
+        if (this.props.mathfieldRef) {
+            this.props.mathfieldRef(this.mathfield);
         }
     }
 }

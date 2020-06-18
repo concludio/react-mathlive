@@ -5,8 +5,8 @@ import {
     cleanup,
     waitForElement,
 } from '@testing-library/react';
-import "mathlive";
-import { MathFieldComponent, combineConfig } from './MathFieldComponent';
+import { MathfieldComponent, combineConfig } from './MathfieldComponent';
+import { Mathfield } from 'mathlive';
 
 afterEach(cleanup);
 
@@ -18,7 +18,7 @@ describe("combineConfig", () => {
         const combinedConfig = combineConfig({
             latex: "fubar",
             onChange: v => value1 = v,
-            mathFieldConfig: {
+            mathfieldConfig: {
                 onContentDidChange: mf => value2 = mf.$latex(),
             },
         });
@@ -37,7 +37,7 @@ describe("combineConfig", () => {
 describe("MathFieldComponent", () => {
     it(" mounts mathfield", () => {
         const mountingResult = render(
-            <MathFieldComponent
+            <MathfieldComponent
                 latex="fubar" 
             />
         );
@@ -48,8 +48,8 @@ describe("MathFieldComponent", () => {
     it(" internal mathfield yields correct latex", () => {
         let mathField: any;
         render(
-            <MathFieldComponent
-                mathFieldRef={mf => mathField = mf}
+            <MathfieldComponent
+                mathfieldRef={mf => mathField = mf}
                 latex="fubar" 
             />
         );
@@ -60,8 +60,8 @@ describe("MathFieldComponent", () => {
         let value = "foo";
         let mathField: any;
         render(
-            <MathFieldComponent
-                mathFieldRef={mf => mathField = mf}
+            <MathfieldComponent
+                mathfieldRef={mf => mathField = mf}
                 onChange={v => value = v}
                 latex={value} 
             />
@@ -80,8 +80,8 @@ describe("MathFieldComponent", () => {
             public mathField: any;
 
             public render() {
-                return <MathFieldComponent 
-                    mathFieldRef={mf => this.mathField = mf}
+                return <MathfieldComponent 
+                    mathfieldRef={mf => this.mathField = mf}
                     latex={this.state.value}
 
                 />;
@@ -102,7 +102,7 @@ describe("MathFieldComponent", () => {
     });
 
     test("invalidly created instances throw correct errors", () => {
-        const mathFieldComponent = new MathFieldComponent({ latex: "fubar" });
+        const mathFieldComponent = new MathfieldComponent({ latex: "fubar" });
 
         try {
             mathFieldComponent.componentDidMount();
