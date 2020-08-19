@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "mathlive": "0.55.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.4.1",
     "react-mathlive": "file:../..",
-    "mathlive": "0.53.2"
+    "react-scripts": "^3.4.3"
   },
   "devDependencies": {
     "@types/jest": "24.0.15",

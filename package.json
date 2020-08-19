@@ -1,6 +1,6 @@
 {
 	"name": "react-mathlive",
-	"version": "3.0.4",
+	"version": "3.0.5-preview",
 	"description": "An interactive math input for react.",
 	"main": "dist/index.js",
 	"files": [
@@ -39,7 +39,7 @@
 		"typescript": "^3.9.5"
 	},
 	"dependencies": {
-		"mathlive": ">= 0.53.0 < 1",
+		"mathlive": ">= 0.55.0 < 1",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0"
 	}

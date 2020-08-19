@@ -1,5 +1,7 @@
 import * as React from "react";
-import { makeMathField, MathfieldConfig, Mathfield } from "mathlive";
+// @ts-ignore
+import Mathlive from "mathlive";
+import "mathlive/dist/mathlive-fonts.css";
 
 interface BaseProps {
     onChange?: (latex: string) => void;
@@ -7,12 +9,12 @@ interface BaseProps {
     /**
      * The raw options of mathlive's makeMathField.
      * */
-    mathfieldConfig?: MathfieldConfig;
+    mathfieldConfig?: Mathlive.MathfieldConfig;
 
     /**
      * The mathfield object returned by makeMathField.
      */
-    mathfieldRef?: (mathfield: Mathfield) => void;
+    mathfieldRef?: (mathfield: Mathlive.Mathfield) => void;
 }
 
 interface ControlledProps extends BaseProps {
@@ -27,8 +29,8 @@ interface UncontrolledProps extends BaseProps {
 
 export type Props = ControlledProps | UncontrolledProps;
 
-export function combineConfig(props: Props): MathfieldConfig {
-    const combinedConfiguration: MathfieldConfig = {
+export function combineConfig(props: Props): Mathlive.MathfieldConfig {
+    const combinedConfiguration: Mathlive.MathfieldConfig = {
         ...props.mathfieldConfig,
     };
 
@@ -37,12 +39,12 @@ export function combineConfig(props: Props): MathfieldConfig {
     if (onChange) {
         if (props.mathfieldConfig && props.mathfieldConfig.onContentDidChange) {
             const fromConfig = props.mathfieldConfig.onContentDidChange;
-            combinedConfiguration.onContentDidChange = (mf) => {
+            combinedConfiguration.onContentDidChange = (mf: Mathlive.Mathfield) => {
                 onChange(mf.$latex());
                 fromConfig(mf);
             };
         } else {
-            combinedConfiguration.onContentDidChange = (mf) =>
+            combinedConfiguration.onContentDidChange = (mf: Mathlive.Mathfield) =>
                 onChange(mf.$latex());
         }
     }
@@ -54,7 +56,7 @@ export function combineConfig(props: Props): MathfieldConfig {
 export class MathfieldComponent extends React.Component<Props> {
     private insertElement: HTMLElement | null = null;
     private readonly combinedConfiguration = combineConfig(this.props);
-    private mathfield: Mathfield | undefined;
+    private mathfield: Mathlive.Mathfield | undefined;
 
     componentDidUpdate(prevProps: Props) {
         if (!this.mathfield) {
@@ -91,7 +93,7 @@ export class MathfieldComponent extends React.Component<Props> {
 
         const initialValue = this.props.initialLatex ?? this.props.latex;
 
-        this.mathfield = makeMathField(
+        this.mathfield = Mathlive.makeMathField(
             this.insertElement,
             this.combinedConfiguration
         );
