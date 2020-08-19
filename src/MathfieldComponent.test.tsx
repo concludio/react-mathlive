@@ -6,7 +6,8 @@ import {
     waitForElement,
 } from '@testing-library/react';
 import { MathfieldComponent, combineConfig } from './MathfieldComponent';
-import { Mathfield } from 'mathlive';
+// @ts-ignore
+import Mathlive from 'mathlive/dist/mathlive';
 
 afterEach(cleanup);
 
@@ -19,13 +20,13 @@ describe("combineConfig", () => {
             latex: "fubar",
             onChange: v => value1 = v,
             mathfieldConfig: {
-                onContentDidChange: mf => value2 = mf.$latex(),
+                onContentDidChange: (mf: Mathlive.Mathfield) => value2 = mf.$latex(),
             },
         });
 
         const mockMathField = {
             $latex: () => "bar",
-        } as Mathfield; 
+        } as Mathlive.Mathfield; 
 
         combinedConfig.onContentDidChange!(mockMathField);
 

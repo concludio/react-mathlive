@@ -1,6 +1,6 @@
 {
 	"name": "react-mathlive",
-	"version": "3.0.5-preview",
+	"version": "3.0.5-preview.1",
 	"description": "An interactive math input for react.",
 	"main": "dist/index.js",
 	"files": [
