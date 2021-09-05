@@ -1,13 +1,7 @@
 import * as React from 'react';
-import {
-    render,
-    fireEvent,
-    cleanup,
-    waitForElement,
-} from '@testing-library/react';
-import { MathfieldComponent, combineConfig } from './MathfieldComponent';
-// @ts-ignore
-import Mathlive from 'mathlive/dist/mathlive';
+import {cleanup, render,} from '@testing-library/react';
+import {combineConfig, MathfieldComponent} from './MathfieldComponent';
+import {Mathfield} from "mathlive";
 
 afterEach(cleanup);
 
@@ -20,13 +14,13 @@ describe("combineConfig", () => {
             latex: "fubar",
             onChange: v => value1 = v,
             mathfieldConfig: {
-                onContentDidChange: (mf: Mathlive.Mathfield) => value2 = mf.$latex(),
+                onContentDidChange: (mf: Mathfield) => value2 = mf.getValue(),
             },
         });
 
         const mockMathField = {
-            $latex: () => "bar",
-        } as Mathlive.Mathfield; 
+            getValue: () => "bar",
+        } as Mathfield;
 
         combinedConfig.onContentDidChange!(mockMathField);
 
@@ -54,7 +48,7 @@ describe("MathFieldComponent", () => {
                 latex="fubar" 
             />
         );
-        expect(mathField.$latex()).toBe("fubar");
+        expect(mathField.getValue()).toBe("fubar");
     });
 
     it(" reacts to direct mathfield interaction", () => {
@@ -68,11 +62,11 @@ describe("MathFieldComponent", () => {
             />
         );
         expect(value).toBe("foo");
-        expect(mathField.$latex()).toBe("foo");
+        expect(mathField.getValue()).toBe("foo");
 
-        mathField.$latex("bar");
+        mathField.setValue("bar");
         expect(value).toBe("bar");
-        expect(mathField.$latex()).toBe("bar");
+        expect(mathField.getValue()).toBe("bar");
     });
     
     it(" accepts changed props", () => {
@@ -81,7 +75,7 @@ describe("MathFieldComponent", () => {
             public mathField: any;
 
             public render() {
-                return <MathfieldComponent 
+                return <MathfieldComponent
                     mathfieldRef={mf => this.mathField = mf}
                     latex={this.state.value}
 
@@ -93,23 +87,12 @@ describe("MathFieldComponent", () => {
         render(<Container ref={c => container = c!} />);
         let mathField = container.mathField;
 
-        expect(mathField.$latex()).toBe("foo");
+        expect(mathField.getValue()).toBe("foo");
 
         container.setState({ value: "bar" });
-        expect(mathField.$latex()).toBe("bar");
+        expect(mathField.getValue()).toBe("bar");
 
         container.setState({ value: "" });
-        expect(mathField.$latex()).toBe("");
-    });
-
-    test("invalidly created instances throw correct errors", () => {
-        const mathFieldComponent = new MathfieldComponent({ latex: "fubar" });
-
-        try {
-            mathFieldComponent.componentDidMount();
-            fail("The previous line should have thrown.");
-        } catch (e) {
-            expect(e.message).toBe("React did apparently not mount the insert point correctly.");
-        }
+        expect(mathField.getValue()).toBe("");
     });
 });
