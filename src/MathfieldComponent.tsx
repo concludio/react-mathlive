@@ -1,7 +1,6 @@
 import * as React from "react";
 import {Mathfield, MathfieldConfig, MathfieldElement} from "mathlive";
 import "mathlive/dist/mathlive-fonts.css";
-import {MathfieldOptions} from "mathlive/dist/public/options";
 import {useEffect, useRef, useState} from "react";
 
 interface BaseProps {
