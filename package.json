@@ -1,5 +1,5 @@
 {
-	"name": "@jasonnathan/react-mathlive",
+	"name": "@seriously/react-mathlive",
 	"version": "3.0.6",
 	"description": "An interactive math input for react.",
 	"main": "dist/index.js",
