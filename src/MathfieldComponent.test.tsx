@@ -108,7 +108,7 @@ describe("MathFieldComponent", () => {
         try {
             mathFieldComponent.componentDidMount();
             fail("The previous line should have thrown.");
-        } catch (e) {
+        } catch (e: any) {
             expect(e.message).toBe("React did apparently not mount the insert point correctly.");
         }
     });
