@@ -7,7 +7,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-mathlive": "file:../..",
-    "react-scripts": "^3.4.3"
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "@types/jest": "24.0.15",
